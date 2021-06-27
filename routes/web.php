@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('payment', [\App\Http\Controllers\HomeController::class, 'payment'])->name('payment');
+Route::post('payment', [\App\Http\Controllers\HomeController::class, 'postPayment'])->name('payment.post');
+Route::post('paymentMethod', [\App\Http\Controllers\HomeController::class, 'postPaymentMethod'])->name('payment-method.post');
+
+/**
+ * Payment callback route is required and referring to the paymentCallback function from royryando/laravel-duitku package
+ */
+Route::post('callback/payment', [\App\Http\Controllers\CallbackController::class, 'paymentCallback']);
+/**
+ * Return callback not supported yet, create your own function
+ */
+Route::get('callback/return', [\App\Http\Controllers\CallbackController::class, 'myReturnCallback']);
+

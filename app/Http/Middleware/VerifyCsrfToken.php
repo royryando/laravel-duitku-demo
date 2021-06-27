@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // Don't forget to exclude the payment callback route for csrf verification, otherwise the callback from Duitku will fail
+        'callback/payment',
     ];
 }
